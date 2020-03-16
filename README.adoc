@@ -1,0 +1,36 @@
+= checkdupes: check duplicate files between directories
+
+== Brief description
+
+For specified directories `main` and `additional`, checkdupes lists
+all the files in `additional` which are not present in `main`.
+In other words: if `F(main)` and `F(additional)` are the sets of
+files in the respective directories, checkdupes displays the
+contents of the set `F(additional) − F(main)`.
+
+== Rationale
+
+When reorganizing or cleaning up an old project, I often end up with a
+large, canonical directory (let's call it `main`) containing all the data
+files in a well-organized structure. Frequently, I will come across a
+smaller directory (call it `additional`) containing a miscellaneous
+collection of files, most of them probably duplicates of files already in
+the `main` directory hierarchy (possibly under a different name or path).
+checkdupes is designed to answer the question '`Which, if any, files in
+`additional` are not already present in `main`?`'.
+
+In short, checkdupes tells me:
+
+. whether I can safely delete `additional` without losing data, and
+. which, if any, files from `additional` I need to copy into `main`
+  before I can safely delete `additional`.
+
+checkdupes ignores file paths and names, and identifies each file using
+its SHA-512 hash. Duplicates _within_ either of the two specified
+directories make no difference: checkdupes only cares about the set of
+files within each of `main` and `additional`, not how many duplicates
+of a file either of them contains.
+
+== Author
+
+By Pontus Lurcock (pont@talvi.net) 2020. Released into the public domain.
